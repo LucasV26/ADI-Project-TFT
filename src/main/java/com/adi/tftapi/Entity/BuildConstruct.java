@@ -1,6 +1,8 @@
 package com.adi.tftapi.Entity;
 
 import com.adi.tftapi.Embeddable.BuildConstructKey;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 
 import javax.persistence.*;
@@ -12,6 +14,9 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 public class BuildConstruct implements Serializable {
 
     @EmbeddedId
@@ -28,6 +33,6 @@ public class BuildConstruct implements Serializable {
     private Unidade unidade;
 
     @ManyToMany
-    @JoinTable(name = "item_champ_build", joinColumns = @JoinColumn(name = "build_champ_id"), inverseJoinColumns = @JoinColumn(name = "item_id"))
+    @JoinTable(name = "item_champ_build", joinColumns = {@JoinColumn(name = "build_id"), @JoinColumn(name = "champion_id")}, inverseJoinColumns = @JoinColumn(name = "item_id"))
     private List<Item> items;
 }
