@@ -35,6 +35,9 @@ public class Sinergia implements Serializable {
 
     private String innate;
 
+    @ManyToMany(mappedBy = "traits")
+    private List<Unidade> unidades;
+
     @ElementCollection
     @CollectionTable(name = "trait_sets", joinColumns = @JoinColumn(name = "trait_key"), foreignKey = @ForeignKey(name = "fk_trait_set"))
     private List<Set> sets;

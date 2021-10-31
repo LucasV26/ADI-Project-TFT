@@ -4,10 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
@@ -29,6 +26,10 @@ public class Unidade implements Serializable {
 
     @Column(nullable = false)
     private int cost;
+
+    @ManyToMany
+    @JoinTable(name = "unidade_sins", joinColumns = @JoinColumn(name = "id_unidade"), inverseJoinColumns = @JoinColumn(name = "id_sinergia"))
+    private List<Sinergia> traits;
 
     @OneToMany(mappedBy = "unidade")
     private List<BuildConstruct> buildConstructs;

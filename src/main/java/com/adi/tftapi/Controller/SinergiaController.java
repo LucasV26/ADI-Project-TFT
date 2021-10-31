@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 public class SinergiaController {
 
@@ -27,12 +25,13 @@ public class SinergiaController {
         return ResponseEntity.notFound().build();
     }
 
-    @PostMapping("/sinergia/popular")
-    public ResponseEntity<Object> popularSinergia(@RequestBody List<Sinergia> sinergias){
-        List<Sinergia> salvas = sinergiaRepository.saveAll(sinergias);
-        if(salvas != null)
-            return ResponseEntity.ok("Sinergias inseridas com sucesso!");
-
-        return ResponseEntity.unprocessableEntity().body("Deu merda, meu amigo");
-    }
+    //Rota utilizada em desenvolvimento para popular banco a partir de dados estruturados em JSON
+//    @PostMapping("/sinergia/popular")
+//    public ResponseEntity<Object> popularSinergia(@RequestBody List<Sinergia> sinergias){
+//        List<Sinergia> salvas = sinergiaRepository.saveAll(sinergias);
+//        if(salvas != null)
+//            return ResponseEntity.ok("Sinergias inseridas com sucesso!");
+//
+//        return ResponseEntity.unprocessableEntity().body("Deu errado, meu amigo ;-;");
+//    }
 }
