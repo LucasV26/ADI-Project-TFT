@@ -15,8 +15,8 @@ import java.io.Serializable;
 public class BuildConstructKey implements Serializable {
 
     @Column(name = "build_id")
-    private Long buildId;
+    private int build;
 
     @Column(name = "champion_id")
-    private String championId;
+    private String champion;
 }

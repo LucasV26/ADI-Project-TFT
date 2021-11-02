@@ -2,6 +2,7 @@ package com.adi.tftapi.Entity;
 
 import com.adi.tftapi.Embeddable.Set;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 
@@ -36,6 +37,7 @@ public class Sinergia implements Serializable {
     private String innate;
 
     @ManyToMany(mappedBy = "traits")
+    @JsonIdentityReference(alwaysAsId = true)
     private List<Unidade> unidades;
 
     @ElementCollection

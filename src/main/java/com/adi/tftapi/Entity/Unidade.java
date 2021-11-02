@@ -1,6 +1,7 @@
 package com.adi.tftapi.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 
@@ -27,10 +28,12 @@ public class Unidade implements Serializable {
     @Column(nullable = false)
     private int cost;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.REMOVE)
     @JoinTable(name = "unidade_sins", joinColumns = @JoinColumn(name = "id_unidade"), inverseJoinColumns = @JoinColumn(name = "id_sinergia"))
+    @JsonIdentityReference(alwaysAsId = true)
     private List<Sinergia> traits;
 
     @OneToMany(mappedBy = "unidade")
+    @JsonIdentityReference(alwaysAsId = true)
     private List<BuildConstruct> buildConstructs;
 }

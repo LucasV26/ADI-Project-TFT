@@ -14,8 +14,8 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/match")
-public class MatchController {
+@RequestMapping("/api")
+public class APIController {
 
     @Value("${api.key}")
     private String apiKey;

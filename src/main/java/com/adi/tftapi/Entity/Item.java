@@ -1,6 +1,7 @@
 package com.adi.tftapi.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 
@@ -30,9 +31,7 @@ public class Item implements Serializable {
     @Column(nullable = false)
     private String description;
 
-    @Column(nullable = false)
-    private boolean isUnique;
-
     @ManyToMany(mappedBy = "items")
+    @JsonIdentityReference(alwaysAsId = true)
     private List<BuildConstruct> buildConstructs;
 }
