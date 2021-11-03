@@ -1,25 +1,30 @@
-package com.adi.tftapi.Controller;
+package com.adi.tftapi.Endpoint.Controller;
 
+import com.adi.tftapi.Endpoint.Service.BuildService;
 import com.adi.tftapi.Entity.Build;
 import com.adi.tftapi.Entity.BuildConstruct;
+import com.adi.tftapi.Model.Unit;
 import com.adi.tftapi.Repository.BuildConstructRepository;
 import com.adi.tftapi.Repository.BuildRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
+@CrossOrigin
 @RequestMapping("/build")
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class BuildController {
 
-    @Autowired
-    private BuildRepository buildRepository;
-
-    @Autowired
-    private BuildConstructRepository buildConstructRepository;
+    private final BuildService buildService;
+    private final BuildRepository buildRepository;
+    private final BuildConstructRepository buildConstructRepository;
 
     @PostMapping("/create")
-    public ResponseEntity<Build> createBuild(@RequestBody Build build){
+    public ResponseEntity<Build> criarBuild(@RequestBody Build build){
 
         return ResponseEntity.ok(buildRepository.save(build));
     }
@@ -31,6 +36,16 @@ public class BuildController {
         return ResponseEntity.ok(construct.getBuild());
     }
 
+    @PostMapping("/favorite")
+    public ResponseEntity<Build> favoritarBuild(@RequestBody List<Unit> build){
+        int novaBuildId = buildService.preencherBuild(build);
+
+        if(buildRepository.findById(novaBuildId).isPresent())
+            return ResponseEntity.ok(buildRepository.findById(novaBuildId).get());
+
+        return ResponseEntity.badRequest().build();
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Build> buscarBuild(@PathVariable int id){
         if(buildRepository.findById(id).isPresent())
@@ -38,4 +53,10 @@ public class BuildController {
 
         return ResponseEntity.notFound().build();
     }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<Build>> listarBuilds(){
+        return ResponseEntity.ok(buildRepository.findAll());
+    }
+
 }

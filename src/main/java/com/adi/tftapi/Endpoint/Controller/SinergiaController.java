@@ -1,4 +1,4 @@
-package com.adi.tftapi.Controller;
+package com.adi.tftapi.Endpoint.Controller;
 
 import com.adi.tftapi.Entity.Sinergia;
 import com.adi.tftapi.Repository.SinergiaRepository;
@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/sinergia")
 public class SinergiaController {
 
@@ -26,6 +27,11 @@ public class SinergiaController {
             return ResponseEntity.ok(sinergiaRepository.findById(id).get());
 
         return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<Sinergia>> listarSinergias(){
+        return ResponseEntity.ok(sinergiaRepository.findAll());
     }
 
     //Rota utilizada em desenvolvimento para popular banco a partir de dados estruturados em JSON

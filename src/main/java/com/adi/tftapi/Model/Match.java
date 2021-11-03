@@ -10,7 +10,6 @@ import lombok.*;
 @ToString
 public class Match {
 
-    private Metadata metadata;
     private Info info;
 
 }

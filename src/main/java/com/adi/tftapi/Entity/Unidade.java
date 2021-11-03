@@ -19,6 +19,10 @@ import java.util.List;
         property = "championId")
 public class Unidade implements Serializable {
 
+    public Unidade(String id){
+        this.championId = id;
+    }
+
     @Id
     private String championId;
 

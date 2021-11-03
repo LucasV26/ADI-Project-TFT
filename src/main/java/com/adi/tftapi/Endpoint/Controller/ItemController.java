@@ -1,4 +1,4 @@
-package com.adi.tftapi.Controller;
+package com.adi.tftapi.Endpoint.Controller;
 
 import com.adi.tftapi.Entity.Item;
 import com.adi.tftapi.Repository.ItemRepository;
@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/item")
 public class ItemController {
 
@@ -26,6 +27,11 @@ public class ItemController {
             return ResponseEntity.ok(itemRepository.findById(id).get());
 
         return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<Item>> listarItems(){
+        return ResponseEntity.ok(itemRepository.findAll());
     }
 
     //Rota utilizada em desenvolvimento para popular banco a partir de dados estruturados em JSON

@@ -22,6 +22,10 @@ import java.util.List;
         property = "id")
 public class Item implements Serializable {
 
+    public Item(int id){
+        this.id = id;
+    }
+
     @Id
     private int id;
 

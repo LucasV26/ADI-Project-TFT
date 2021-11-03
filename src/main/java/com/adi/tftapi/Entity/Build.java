@@ -18,6 +18,15 @@ import java.util.List;
         property = "id")
 public class Build implements Serializable {
 
+    public Build(int id){
+        this.id = id;
+    }
+
+    public Build(String nome, String descrip){
+        this.name = nome;
+        this.description = descrip;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
