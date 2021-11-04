@@ -14,5 +14,6 @@ public class Participant {
 
     private int placement;
     private String puuid;
+    private String name;
     private List<Unit> units;
 }

@@ -1,6 +1,7 @@
 package com.adi.tftapi.Endpoint.Controller;
 
 import com.adi.tftapi.Model.Match;
+import com.adi.tftapi.Model.Participant;
 import com.adi.tftapi.Model.Summoner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -33,6 +34,11 @@ public class APIController {
     @GetMapping("/{matchId}")
     public Match getMatchInfo(@PathVariable String matchId) {
         Match match = restTemplate.getForObject("https://americas.api.riotgames.com/tft/match/v1/matches/" + matchId + "?api_key=" + this.apiKey, Match.class);
+
+        for(Participant p : match.getInfo().getParticipants()){
+            Summoner summoner = restTemplate.getForObject("https://br1.api.riotgames.com/tft/summoner/v1/summoners/by-puuid/" + p.getPuuid() + "?api_key=" + this.apiKey, Summoner.class);
+            p.setName(summoner.getName());
+        }
 
         return match;
     }
