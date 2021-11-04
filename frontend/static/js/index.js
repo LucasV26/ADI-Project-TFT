@@ -112,7 +112,7 @@ $(document).ready(function () {
     let [dados, pasta, chave] = dadoSelecionado.val().split("-");
     carregarVisualLista(Dados[dados], pasta, chave);
 
-    dadoSelecionado.change(function (e) {
+    dadoSelecionado.change(function () {
         [dados, pasta, chave] = $(this).val().split("-");
 
         carregarVisualLista(Dados[dados], pasta, chave);

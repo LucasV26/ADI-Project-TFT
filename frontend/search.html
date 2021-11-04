@@ -1,10 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8">
+        <title>TFT - API</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <label> Pesquisar Jogadores </label><br>
+        <input type="text" id="search-name" />
+        <select id="search-number">
+            <option value="1" selected> 1 </option>
+            <option value="5"> 5 </option>
+            <option value="10"> 10 </option>
+            <option value="15"> 15 </option>
+            <option value="20"> 20 </option>
+        </select>
+        <input type="button" id="search" value="Buscar">
+        <p id="erro" style="color: red"></p>
+        <div id="lista-jogadores">
+            <!-- Lista de partidas de um jogador sera carregada -->
+        </div>
+        <div id="detalhes-partida">
+            <!-- Estatísticas de uma partida em específico -->
+        </div>
 
-</body>
+        <script src="static/js/search.js"></script>
+    </body>
 </html>
