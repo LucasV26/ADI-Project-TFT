@@ -1,5 +1,6 @@
 package com.adi.tftapi;
 
+import com.adi.tftapi.Component.RestTemplateResponseErrorHandler;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -15,7 +16,7 @@ public class TftApiApplication {
 
 	@Bean
 	public RestTemplate restTemplate(RestTemplateBuilder builder) {
-		return builder.build();
+		return builder.errorHandler(new RestTemplateResponseErrorHandler()).build();
 	}
 
 }
