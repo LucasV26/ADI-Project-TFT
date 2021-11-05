@@ -3,6 +3,7 @@ const frontURL = "http://localhost:63342/tft-api/frontend/static/img/";
 const jogadoresBox = $("#lista-jogadores");
 const partidaBox = $("#detalhes-partida");
 const botaoPesquisa = $("#search");
+let Builds;
 
 function ativarBotao() {
     botaoPesquisa.prop("disabled", false);
@@ -40,9 +41,11 @@ function pesquisarPartidas(){
 function carregarPartida(id) {
     jogadoresBox.html("");
     partidaBox.html("Carregando...");
+    Builds = [];
 
     $.getJSON(`${baseURL}api/${id}`, function (data, status) {
         let info = data.info;
+        let count = 0;
         saida = "";
         saida += `<h3>Versão do Jogo: ${info.tft_set_number}</h3>
                   <h2>Jogadores:</h2>`;
@@ -70,6 +73,10 @@ function carregarPartida(id) {
                 saida += "</div>";
             }
 
+            saida += `<input type='button' id='${count}' class="favorite-build" value="Favoritar"/>`;
+            Builds[count] = j.units;
+            count++;
+
             saida += "  </div>";
             saida += "</div>";
         }
@@ -79,10 +86,30 @@ function carregarPartida(id) {
     })
 }
 
+function favoritarBuild(id) {
+    let data = JSON.stringify(Builds[id]);
+    let botao_favoritar = $(`input#${id}`);
+
+    botao_favoritar.prop("disabled", true);
+
+    $.ajax({
+        contentType: 'application/json',
+        data: data,
+        dataType: 'json',
+        success: function (data, status) {
+            window.alert("Build favoritada com sucesso! Visite sua aba de favoritos para vê-la!");
+            botao_favoritar.val("Favoritada");
+        },
+        type: 'POST',
+        url: `${baseURL}build/favorite`
+    });
+
+}
+
 $(document).ready(function () {
 
     $("#search").click(pesquisarPartidas.bind(this));
     $("#search-name").on("keyup", handleEnter.bind(this));
     jogadoresBox.on('click', 'input.partida', function (){ carregarPartida(this.id); });
-
+    partidaBox.on('click', 'input.favorite-build', function () { favoritarBuild(this.id) });
 });
