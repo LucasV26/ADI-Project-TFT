@@ -37,7 +37,7 @@ public class Unidade implements Serializable {
     @JsonIdentityReference(alwaysAsId = true)
     private List<Sinergia> traits;
 
-    @OneToMany(mappedBy = "unidade")
+    @OneToMany(mappedBy = "unidade", cascade = CascadeType.REMOVE)
     @JsonIdentityReference(alwaysAsId = true)
     private List<BuildConstruct> buildConstructs;
 }

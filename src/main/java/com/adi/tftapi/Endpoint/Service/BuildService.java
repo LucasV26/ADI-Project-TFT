@@ -24,7 +24,7 @@ public class BuildService {
 
     //Salvando no banco a Build recebida da API (lista de unidades)
     public int preencherBuild(List<Unit> build){
-        Build novaBuild = new Build("Nova Build", "Build recem criada");
+        Build novaBuild = new Build("Nova Favoritada", "Build recem adicionada");
 
         novaBuild = buildRepository.save(novaBuild);
 

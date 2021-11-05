@@ -23,12 +23,12 @@ public class BuildConstruct implements Serializable {
     @EmbeddedId
     private BuildConstructKey id;
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne
     @MapsId("build")
     @JoinColumn(name = "build_id")
     private Build build;
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne
     @MapsId("champion")
     @JoinColumn(name = "champion_id")
     private Unidade unidade;

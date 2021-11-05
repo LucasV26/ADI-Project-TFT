@@ -5,10 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
@@ -35,7 +32,7 @@ public class Item implements Serializable {
     @Column(nullable = false)
     private String description;
 
-    @ManyToMany(mappedBy = "items")
+    @ManyToMany
     @JsonIdentityReference(alwaysAsId = true)
     private List<BuildConstruct> buildConstructs;
 }

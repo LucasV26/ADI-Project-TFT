@@ -37,6 +37,6 @@ public class Build implements Serializable {
     @Column(nullable = false)
     private String description;
 
-    @OneToMany(mappedBy = "build")
+    @OneToMany(mappedBy = "build", cascade = CascadeType.REMOVE)
     private List<BuildConstruct> buildConstructs;
 }

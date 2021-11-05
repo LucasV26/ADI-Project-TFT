@@ -54,6 +54,17 @@ public class BuildController {
         return ResponseEntity.notFound().build();
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deletarBuild(@PathVariable int id){
+
+        if(buildRepository.findById(id).isPresent()) {
+            buildRepository.delete(buildRepository.findById(id).get());
+            return ResponseEntity.ok("Build excluida com sucesso");
+        }
+
+        return ResponseEntity.badRequest().build();
+    }
+
     @GetMapping("/all")
     public ResponseEntity<List<Build>> listarBuilds(){
         return ResponseEntity.ok(buildRepository.findAll());

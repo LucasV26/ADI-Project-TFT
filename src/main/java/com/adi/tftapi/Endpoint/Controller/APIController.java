@@ -27,8 +27,6 @@ public class APIController {
     public ResponseEntity<List<String>> getUserMatchHistory(@PathVariable String name, @PathVariable int count) {
         Summoner summoner = restTemplate.getForObject("https://br1.api.riotgames.com/tft/summoner/v1/summoners/by-name/" + name + "?api_key=" + this.apiKey, Summoner.class);
 
-        System.out.println("\n\nCONTINUOU ASDIOFJASIOFJAOISDPJGOIASD\n\n" + summoner + "\n\n");
-
         if(summoner.getPuuid() == null)
             return ResponseEntity.notFound().build();
 
