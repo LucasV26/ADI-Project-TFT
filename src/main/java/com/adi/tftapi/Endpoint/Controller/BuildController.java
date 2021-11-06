@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -27,6 +28,14 @@ public class BuildController {
     public ResponseEntity<Build> criarBuild(@RequestBody Build build){
 
         return ResponseEntity.ok(buildRepository.save(build));
+    }
+
+    @PatchMapping("/update")
+    public ResponseEntity<Build> atualizarBuild(@RequestBody Build build){
+        build.setBuildConstructs(new ArrayList<>());
+        buildRepository.updateBuildById(build.getName(), build.getDescription(), build.getId());
+
+        return ResponseEntity.ok(build);
     }
 
     @PostMapping("/construct")
