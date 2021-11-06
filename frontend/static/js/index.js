@@ -35,10 +35,9 @@ let Detalhe = {
                     "<div id='campeoes'>" +
                         "<h3> Campeões </h3>";
         for(let c of obj.unidades){
-            let nome = c.split("_")[1];
             saida +=    "<div id='"+c+"' onclick='alterarDetalhe(this.id, \"unidades\", \"champions/\", \"championId\")'>" +
-                            "<h5> " + nome + " </h5>" +
-                            "<img width='60px' src='"+frontURL+"/champions/"+c+".png'/>" +
+                            "<h5> " + c.name + " </h5>" +
+                            "<img width='60px' src='"+frontURL+"/champions/"+c.championId+".png'/>" +
                         "</div>";
         }
         saida +=    "</div>";
@@ -112,7 +111,7 @@ $(document).ready(function () {
     let [dados, pasta, chave] = dadoSelecionado.val().split("-");
     carregarVisualLista(Dados[dados], pasta, chave);
 
-    dadoSelecionado.change(function () {
+    dadoSelecionado.click(function () {
         [dados, pasta, chave] = $(this).val().split("-");
 
         carregarVisualLista(Dados[dados], pasta, chave);
