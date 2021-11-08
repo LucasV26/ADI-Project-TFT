@@ -3,25 +3,45 @@
     <head>
         <meta charset="UTF-8">
         <title>TFT - API</title>
+        <link rel="stylesheet" href="static/css/global.css">
+        <link rel="stylesheet" href="static/css/index.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     </head>
     <body>
-        <div id="header">
+        <div class="header">
+            <p> TFT API </p>
             <nav>
-                <ul>
+                <ul class="links-menu">
                     <li> <a href="#"> Conferir Dados </a> </li>
                     <li> <a href="builds.html"> Meus Favoritos </a> </li>
                     <li> <a href="search.html"> Pesquisar Builds </a> </li>
                 </ul>
             </nav>
         </div>
-        <select id="lista-info">
-            <option value="unidades-champions/-championId" selected> Campeões </option>
-            <option value="sinergias-traits/-name"> Sinergias </option>
-            <option value="items-items/-id"> Items </option>
-        </select>
+
+        <div id="select-container">
+
+            <div id="selectors">
+                <label class="switch">
+                    <input type="radio" id="campeoes" value="unidades-champions/-championId" name="select">
+                    <p> Campeões </p>
+                </label>
+
+                <label class="switch">
+                    <input type="radio" id="sinergias" value="sinergias-traits/-name" name="select">
+                    <p> Sinergias </p>
+                </label>
+
+                <label class="switch">
+                    <input type="radio" id="items" value="items-items/-id" name="select">
+                    <p> Items </p>
+                </label>
+            </div>
+
+        </div>
 
         <div id="lista-data">
+            <h1> SELECIONE OS DADOS QUE DESEJA VER </h1>
             <!-- DIV onde será carregada a lista dos dados desejados -->
         </div>
 

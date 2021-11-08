@@ -50,6 +50,12 @@ function countMarca(objeto, id) {
         objeto[id] = 1;
 }
 
+function handleEnter(e){
+    if(e.keyCode === 13){
+        atualizarBuild(BuildAtual, e.currentTarget.form.buildName.value, e.currentTarget.form.buildDescription.value)
+    }
+}
+
 function carregarMarcas(objeto) {
     saida = `<div id="marcas">
               <h3> Marcas Alcançadas: </h3>`;
@@ -68,6 +74,7 @@ function carregarMarcas(objeto) {
 function atualizarBuild(build, novoNome, novaDescricao) {
     build.name = novoNome;
     build.description = novaDescricao;
+    delete build.buildConstructs;
 
     $.ajax({
         contentType: 'application/json',
@@ -75,7 +82,8 @@ function atualizarBuild(build, novoNome, novaDescricao) {
         dataType: 'json',
         success: function (data, status) {
             window.alert("Build atualizada com sucesso!");
-            detalharBuild(data);
+            Builds = instanciarBuilds();
+            detalharBuild(Builds.find((b) => b.id == data.id));
         },
         type: 'PATCH',
         url: `${baseURL}build/update`
@@ -91,8 +99,8 @@ function detalharBuild(build) {
 
     saida += `<div id="info">
                 <form>
-                    <p>Nome:</p> <input type="text"  value="${build.name}"  name="buildName"/>
-                    <p>Descrição:</p> <input type="text" value="${build.description}"  name="buildDescription"/>
+                    <p>Nome:</p> <input type="text"  value="${build.name}" id="bName"  name="buildName"/>
+                    <p>Descrição:</p> <input type="text" value="${build.description}" id="bDescription"  name="buildDescription"/>
                     <input type="button" value="Atualizar" id="atualizar">
                 </form>
               </div>`;
@@ -161,5 +169,7 @@ $(document).ready(function () {
 
     buildList.on('click', 'input.detalhar', function () { detalharBuild(Builds.find((b) => b.id == this.id)); });
     buildList.on('click', 'input.apagar', function () { apagarBuild(this.id); });
+    buildDetail.on('keyup', 'input#bName', handleEnter.bind(this));
+    buildDetail.on('keyup', 'input#bDescription', handleEnter.bind(this));
     buildDetail.on('click', 'input#atualizar', function () { atualizarBuild(BuildAtual, this.form.buildName.value, this.form.buildDescription.value) });
 });
