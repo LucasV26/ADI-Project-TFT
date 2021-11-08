@@ -1,6 +1,6 @@
 const baseURL = "http://localhost:8080/";
 const frontURL = "http://localhost:63342/tft-api/frontend/static/img/";
-const jogadoresBox = $("#lista-jogadores");
+const jogadoresBox = $("#lista-jogos");
 const partidaBox = $("#detalhes-partida");
 const botaoPesquisa = $("#search");
 let Builds;
@@ -26,9 +26,12 @@ function pesquisarPartidas(){
     $.getJSON(`${baseURL}api/${nome}/${quantidade}`, function (data, status) {
         saida = "";
         for(let i = 0; i < data.length; i++){
-            saida += `<p>Partida ${i+1}: ${data[i]}</p> <input class="partida" type="button" id="${data[i]}" value="Acessar"/>`;
+            saida += `<div>
+                        <p>Partida ${i+1}: ${data[i]}</p> <br/> <input class="partida" type="button" id="${data[i]}" value="Acessar"/>
+                      </div>`;
         }
 
+        partidaBox.html("");
         jogadoresBox.html(saida);
         ativarBotao();
     }).fail(function () {
@@ -40,40 +43,51 @@ function pesquisarPartidas(){
 
 function carregarPartida(id) {
     jogadoresBox.html("");
-    partidaBox.html("Carregando...");
+    partidaBox.html("<br/><br/> <h1>Carregando...</h1>");
     Builds = [];
 
     $.getJSON(`${baseURL}api/${id}`, function (data, status) {
         let info = data.info;
         let count = 0;
         saida = "";
-        saida += `<h3>Versão do Jogo: ${info.tft_set_number}</h3>
-                  <h2>Jogadores:</h2>`;
+        saida += `<div id="partida-status">
+                      <h3>Versão do Jogo: ${info.tft_set_number}</h3>
+                      <h1>Jogadores</h1>
+                  </div>`;
 
-        saida += "<div id='jogadores'>"
+        saida += "<div id='jogadores'>";
+
+        info.participants.sort((a, b) => (a.placement > b.placement) ? 1 : (b.placement > a.placement) ? -1 : 0);
         for(let j of info.participants){
             saida += `<div class="jogador">
-                          <p>Nome: ${j.name}</p>
-                          <p>Colocação: ${j.placement}</p>
-                          <div class="build">
-                            <h4> Campeões Utilizados: </h4>`;
+                          <div>
+                              <h2>Nome: ${j.name}</h2>
+                              <h3>Colocação: ${j.placement}</h3>
+                          </div>
+                          <div class="build">`;
 
             for(let u of j.units){
                 let nome = u.character_id.split("_")[1];
-                    saida += `<p>${nome}</p>
-                              <img src="${frontURL}champions/${u.character_id}.png" alt="Campeão ${nome}"/>
-                              <div class="items">
-                                <p>Com os items:</p>`;
+                    saida += `<div>
+                                  <div>
+                                      <p>${nome}</p>
+                                      <img src="${frontURL}champions/${u.character_id}.png" alt="Campeão ${nome}"/>
+                                  </div>`;
+
+                    saida += u.items.length ? `<div class="items">
+                                                 <p>Usando</p>` : ``;
 
                 for(let i of u.items){
                     let aux = i < 10 ? "0" : "";
                         saida += `<img src="${frontURL}items/${aux}${i}.png" alt="Item ${i}"/>`;
                 }
 
-                saida += "</div>";
+                saida += u.items.length ? `</div>` : ``;
+
+                saida += `   </div>`;
             }
 
-            saida += `<input type='button' id='${count}' class="favorite-build" value="Favoritar"/>`;
+            saida += `<input type='button' id='${count}' class="favorite-build" value="❤" title="Favoritar"/>`;
             Builds[count] = j.units;
             count++;
 
@@ -98,7 +112,9 @@ function favoritarBuild(id) {
         dataType: 'json',
         success: function (data, status) {
             window.alert("Build favoritada com sucesso! Visite sua aba de favoritos para vê-la!");
-            botao_favoritar.val("Favoritada");
+            botao_favoritar.removeClass("favorite-build");
+            botao_favoritar.prop("title", "Já Favoritada");
+            botao_favoritar.val("❌");
         },
         type: 'POST',
         url: `${baseURL}build/favorite`

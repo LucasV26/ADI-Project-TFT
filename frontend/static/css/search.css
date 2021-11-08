@@ -1,0 +1,103 @@
+#container {
+    display: grid;
+    place-items: center;
+    margin: 30px auto 0 auto;
+    background: #1d1e20;
+    max-width: 700px;
+    padding: 20px;
+    color: white;
+}
+
+#container #search {
+    margin-top: 20px;
+
+}
+
+#container #search-number, #container #search-name {
+    box-shadow: 1px 3px 20px #4d5061;
+    font-size: 1.2rem;
+    padding: .7rem;
+    background: #4d5061;
+    color: white;
+}
+
+#container #search {
+    box-shadow: 1px 3px 20px #4d5061;
+    font-size: 1.2rem;
+    padding: .5rem;
+    background: #4d5061;
+    color: white;
+}
+
+#lista-jogos {
+    background: #1d1e20;
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+#lista-jogos > div {
+    flex: 1 1 150px;
+    margin: 45px;
+}
+
+#lista-jogos > div input {
+    box-shadow: 1px 1px 10px #4d5061;
+    font-size: 1rem;
+    padding: .2rem;
+    background: #4d5061;
+    color: white;
+}
+
+#detalhes-partida {
+    text-align: center;
+}
+
+#partida-status {
+    text-align: center;
+}
+
+#jogadores {
+    display: grid;
+    grid-template-rows: repeat(8, 1fr);
+    background-color: #1d1e20;
+}
+
+.jogador {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    margin: 30px auto;
+    padding: 30px;
+    width: 1700px;
+    border: 1px solid white;
+    box-shadow: 1px 3px 20px #4d5061;
+    color: white;
+}
+
+.build {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1200px;
+}
+
+.build input {
+    margin-top: 200px;
+    margin-left: 30px;
+    border-radius: 100%;
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+    color: #1d1e20;
+    transition: 1s;
+}
+
+.favorite-build:hover{
+    font-size: 30px;
+    color: red;
+}
+
+.build > div {
+    flex: 1 1 60px;
+    margin: 0 10px;
+}
