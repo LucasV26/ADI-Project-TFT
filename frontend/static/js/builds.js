@@ -34,6 +34,7 @@ function carregarLista() {
                   </div>`;
     }
 
+    $("#titulo").html("Suas Builds");
     buildDetail.html("");
     buildList.html(saida);
 }
@@ -62,8 +63,10 @@ function carregarMarcas(objeto) {
     for(let m in objeto){
         saida += `<div class="marca">
                     <img src="${frontURL}traits/${m}.png" alt="Sinergia ${m}"/>
-                    <p> ${m} </p>
-                    <p> Quantidade: ${objeto[m]} </p>
+                    <div>
+                        <p> ${m} </p>
+                        <p> Quantidade: ${objeto[m]} </p>
+                    </div>
                   </div>`
     }
     saida +=`</div>`;
@@ -95,18 +98,22 @@ function detalharBuild(build) {
     let buildConstructs = build.buildConstructs;
     let marcas = {};
 
-    saida = "<input type='button' value='Voltar' onclick='atualizarLista()'/>";
+    saida = "<input type='button' id='voltar' value='Voltar' onclick='atualizarLista()'/>";
 
     saida += `<div id="info">
                 <form>
-                    <p>Nome:</p> <input type="text"  value="${build.name}" id="bName"  name="buildName"/>
-                    <p>Descrição:</p> <input type="text" value="${build.description}" id="bDescription"  name="buildDescription"/>
+                    <div>
+                        <label>Nome:</label><br/><input type="text"  value="${build.name}" id="bName"  name="buildName"/>
+                    </div>
+                    <div>
+                        <label>Descrição:</label><br/><input type="text" value="${build.description}" id="bDescription"  name="buildDescription"/>
+                    </div>
                     <input type="button" value="Atualizar" id="atualizar">
                 </form>
               </div>`;
 
     saida += `<div id="composition">
-                <h3> Composição: </h3>`;
+                <h1> Composição: </h1>`;
 
     for(let bc of buildConstructs){
         let unidade = bc.unidade;
@@ -148,6 +155,7 @@ function detalharBuild(build) {
 
     saida += `</div>`;
 
+    $("#titulo").html("");
     buildList.html("");
     buildDetail.html(saida);
 }

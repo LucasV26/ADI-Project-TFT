@@ -1,0 +1,82 @@
+#titulo {
+    text-align: center;
+}
+
+#lista-builds {
+    display: flex;
+    margin: 30px auto;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    text-align: center;
+    color: white;
+}
+
+#lista-builds > div {
+    flex: 1 1 250px;
+    margin: 10px;
+    padding: 20px;
+    background-color: #1d1e20;
+}
+
+.build input {
+    background-color: #4d5061;
+    box-shadow: 1px 1px 5px #4d5061;
+    padding: 5px;
+    color: white;
+}
+
+#build-detalhe {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    place-items: center;
+    margin: 0 auto;
+}
+
+#voltar, #atualizar {
+    background-color: #4d5061;
+    box-shadow: 1px 1px 5px #4d5061;
+    color: white;
+    padding: 5px;
+    font-size: 1rem;
+}
+
+#info form {
+    display: flex;
+    align-items: center;
+}
+
+#info form > * {
+    margin: 0 30px;
+}
+
+#bName, #bDescription {
+    background-color: #4d5061;
+    color: white;
+    font-size: 1.1rem;
+}
+
+#composition {
+    display: flex;
+    grid-column: 1 / 4;
+    margin-top: 30px;
+    padding: 30px;
+    flex-wrap: wrap;
+    background-color: #1d1e20;
+    color: white;
+}
+
+#composition h3, #composition h1 {
+    margin-right: 50px;
+}
+
+#composition > div {
+    flex: 1 1 100px;
+    margin: 0 10px;
+}
+
+.marca {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-gap: 10px;
+    margin-top: 30px;
+}

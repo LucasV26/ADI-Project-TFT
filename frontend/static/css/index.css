@@ -109,6 +109,7 @@ p#voltar:hover {
 #campeoes > div {
     flex: 1 1 100px;
     margin: 10px;
+    cursor: pointer;
 }
 
 #sinergias {
@@ -118,4 +119,5 @@ p#voltar:hover {
 
 #sinergias > div {
     margin: 20px;
+    cursor: pointer;
 }
