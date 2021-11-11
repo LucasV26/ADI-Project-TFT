@@ -58,6 +58,7 @@ input:checked + p {
 #lista-data > div {
     flex: 1 1 150px;
     margin: 10px;
+    cursor: pointer;
 }
 
 #detalhe-data {
